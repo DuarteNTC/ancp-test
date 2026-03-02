@@ -8,6 +8,11 @@ $db = $database->getConnection();
 
 $animal = new Animal($db);
 
+$nome = '';
+$serie = '';
+$rgn = '';
+$sexo = '';
+$dt_nasc = '';
 $erros = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -81,23 +86,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <form method="POST">
 
     <label>Nome:</label><br>
-    <input type="text" name="nome" required maxlength="24"><br><br>
+    <input type="text" name="nome" class="form-control"
+       value="<?= htmlspecialchars($nome) ?>" maxlength="24"><br><br>
 
     <label>Série:</label><br>
-    <input type="text" name="serie" required maxlength="4"><br><br>
+    <input type="text" name="serie" class="form-control"
+       value="<?= htmlspecialchars($serie) ?>" maxlength="4"><br><br>
 
     <label>RGN:</label><br>
-    <input type="text" name="rgn" required maxlength="16"><br><br>
+    <input type="text" name="rgn" class="form-control"
+       value="<?= htmlspecialchars($rgn) ?>" maxlength="16"><br><br>
 
     <label>Sexo:</label><br>
-    <select name="sexo" required>
-        <option value="">Selecione</option>
-        <option value="1">Macho</option>
-        <option value="2">Fêmea</option>
+    <select name="sexo" class="form-select">
+    <option value="">Selecione</option>
+    <option value="1" <?= $sexo == 1 ? 'selected' : '' ?>>Macho</option>
+    <option value="2" <?= $sexo == 2 ? 'selected' : '' ?>>Fêmea</option>
     </select><br><br>
 
     <label>Data de Nascimento:</label><br>
-    <input type="date" name="dt_nasc" required><br><br>
+    <input type="date" name="dt_nasc" class="form-control"
+       value="<?= htmlspecialchars($dt_nasc) ?>"><br><br>
 
     <button type="submit">Salvar</button>
 
