@@ -29,8 +29,7 @@ Aplicação web desenvolvida em PHP puro com MySQL para cadastro e listagem de a
 
 1. Instalar XAMPP
 2. Iniciar Apache e MySQL
-3. Criar banco `animais_db`
-4. Executar script SQL localizado em `/sql`
+3. Criar banco `animais_db` dentro do PhpAdmin
 5. Colocar projeto dentro de:
    C:\xampp\htdocs\
 6. Acessar:
