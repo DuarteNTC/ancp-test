@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS animais_db;
+USE animais_db;
+
+CREATE TABLE IF NOT EXISTS animais (
+    cga INT AUTO_INCREMENT PRIMARY KEY,
+    serie CHAR(4) NOT NULL,
+    rgn CHAR(16) NOT NULL,
+    sexo INT NOT NULL,
+    nome VARCHAR(24) NOT NULL,
+    dt_nasc DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
