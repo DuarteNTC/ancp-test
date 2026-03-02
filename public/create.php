@@ -8,24 +8,75 @@ $db = $database->getConnection();
 
 $animal = new Animal($db);
 
+$erros = [];
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $nome = $_POST["nome"];
-    $serie = $_POST["serie"];
-    $rgn = $_POST["rgn"];
-    $sexo = $_POST["sexo"];
-    $dt_nasc = $_POST["dt_nasc"];
+    $nome = trim($_POST["nome"] ?? '');
+    $serie = strtoupper(trim($_POST["serie"] ?? ''));
+    $rgn = trim($_POST["rgn"] ?? '');
+    $sexo = $_POST["sexo"] ?? '';
+    $dt_nasc = $_POST["dt_nasc"] ?? '';
 
-    if ($animal->create($nome, $serie, $rgn, $sexo, $dt_nasc)) {
-        header("Location: index.php?sucesso=1");
-        exit;
-    } else {
-        echo "Erro ao cadastrar.";
+
+    // ===== Validações =====
+
+    // Nome
+    if (empty($nome)) {
+        $erros[] = "Nome é obrigatório.";
+    } elseif (strlen($nome) > 24) {
+        $erros[] = "Nome deve ter no máximo 24 caracteres.";
+    }
+
+    // Série (4 letras maiúsculas)
+    if (!preg_match('/^[A-Z]{4}$/', $serie)) {
+        $erros[] = "Série deve conter exatamente 4 letras maiúsculas.";
+    }
+
+    // RGN
+    if (empty($rgn)) {
+        $erros[] = "RGN é obrigatório.";
+    } elseif (strlen($rgn) > 16) {
+        $erros[] = "RGN deve ter no máximo 16 caracteres.";
+    }
+
+    // Sexo
+    if ($sexo != 1 && $sexo != 2) {
+        $erros[] = "Sexo inválido.";
+    }
+
+    // Data de nascimento
+    if (empty($dt_nasc)) {
+        $erros[] = "Data de nascimento é obrigatória.";
+    } elseif ($dt_nasc > date('Y-m-d')) {
+        $erros[] = "Data de nascimento não pode ser futura.";
+    }
+
+    // ===== Tratamento =====
+    if (empty($erros)) {
+
+        if ($animal->create($nome, $serie, $rgn, $sexo, $dt_nasc)) {
+            header("Location: index.php?sucesso=1");
+            exit;
+        } else {
+            $erros[] = "Erro ao cadastrar no banco.";
+        }
     }
 }
+
 ?>
 
 <h2>Cadastrar Animal</h2>
+
+<?php if (!empty($erros)): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($erros as $erro): ?>
+                <li><?= htmlspecialchars($erro) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
 <form method="POST">
 
