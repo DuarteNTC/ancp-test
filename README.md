@@ -1,165 +1,80 @@
-📘 Sistema de Cadastro de Animais
+# Sistema de Cadastro de Animais
 
-Projeto desenvolvido como teste técnico utilizando PHP puro (sem frameworks) para cadastro e listagem de animais.
+## 📌 Descrição
+Aplicação web desenvolvida em PHP puro com MySQL para cadastro e listagem de animais, conforme solicitado no teste técnico.
 
-A interface utiliza Bootstrap 5 apenas para organização visual e melhor experiência de navegação, sem uso de qualquer framework back-end.
+---
 
-🛠️ Tecnologias Utilizadas
+## 🚀 Tecnologias Utilizadas
+- PHP 8.2
+- MySQL 8.0
+- PDO (Prepared Statements)
+- Bootstrap 5 (apenas para melhoria visual)
+- XAMPP (ambiente local)
 
-PHP 8.2
+---
 
-MySQL 8.0
+## ⚙️ Funcionalidades
 
-Bootstrap 5.3
+✔ Cadastro de animal  
+✔ Listagem de animais  
+✔ Cálculo de idade baseado na data de nascimento  
+✔ Ordenação por data de cadastro (mais recente primeiro)  
+✔ Filtro para animais com mais de 2 anos  
+✔ Proteção contra SQL Injection  
 
-PDO para conexão com banco de dados
+---
 
-Prepared Statements para prevenção de SQL Injection
+## 🛠️ Como Executar
 
-⚙️ Requisitos
+1. Instalar XAMPP
+2. Iniciar Apache e MySQL
+3. Criar banco `animais_db`
+4. Executar script SQL localizado em `/sql`
+5. Colocar projeto dentro de:
+   C:\xampp\htdocs\
+6. Acessar:
+   http://localhost/ancp-test/public/index.php
 
-PHP 8.0 ou superior
+---
 
-MySQL 5.7+ ou MySQL 8+
+## 🗄️ Banco de Dados
 
-Servidor web (Apache, Nginx ou similar)
+O projeto disponibiliza duas opções de base de dados, dependendo da necessidade.
 
-Pode ser executado em qualquer ambiente como:
+## 🔹 Opção 1 – Base limpa (início de novo ambiente)
 
-XAMPP
+Arquivo: sql/database.sql
 
-WAMP
+- Contém apenas:
 
-Laragon
+1. Estrutura das tabelas
 
-Docker
+2. Índices
 
-Servidor configurado manualmente
-
-📂 Estrutura do Projeto
-ancp-test/
-│
-├── config/
-│   └── database.php
-│
-├── models/
-│   └── Animal.php
-│
-├── public/
-│   ├── index.php
-│   └── create.php
-│
-├── sql/
-│   ├── database.sql
-│   └── lista-animais-criados.sql
-│
-└── README.md
-🗄️ Banco de Dados
-
-O projeto disponibiliza duas opções de base de dados, dependendo da necessidade do avaliador.
-
-🔹 Opção 1 – Base limpa (recomendada para novo ambiente)
-
-Arquivo:
-
-sql/database.sql
-
-Contém:
-
-Estrutura das tabelas
-
-Índices
-
-Configuração inicial
+3. Configuração inicial
 
 Ideal para iniciar um ambiente do zero.
 
-Criar banco manualmente:
-CREATE DATABASE cadastro_animais;
 
-Depois importar o arquivo database.sql.
+## 🔹 Opção 2 – Base com dados cadastrados (ambiente de desenvolvimento)
 
-🔹 Opção 2 – Base com dados cadastrados (ambiente de desenvolvimento)
+Arquivo: sql/lista-animais-criados.sql
 
-Arquivo:
+- Contém:
 
-sql/lista-animais-criados.sql
+1. Estrutura da tabela
 
-Contém:
+2. Registros cadastrados durante o desenvolvimento
 
-Estrutura da tabela
-
-Registros cadastrados durante o desenvolvimento
-
-Dados prontos para visualização imediata
+3. Dados prontos para visualização imediata
 
 Essa opção permite visualizar o funcionamento completo do sistema sem necessidade de realizar novos cadastros.
 
-📥 Como Importar os Arquivos SQL
-Via terminal:
+---
+## 🧠 Estrutura do Projeto
 
-Para base limpa:
-
-mysql -u usuario -p cadastro_animais < sql/database.sql
-
-Para base com dados:
-
-mysql -u usuario -p cadastro_animais < sql/lista-animais-criados.sql
-Via ferramenta gráfica (phpMyAdmin, DBeaver, MySQL Workbench):
-
-Criar o banco cadastro_animais
-
-Selecionar a opção Importar
-
-Escolher o arquivo desejado dentro da pasta sql
-
-Executar
-
-🔧 Configuração da Conexão
-
-Editar o arquivo:
-
-config/database.php
-
-E ajustar:
-
-Host
-
-Nome do banco (cadastro_animais)
-
-Usuário
-
-Senha
-
-🚀 Executando o Projeto
-
-Colocar a pasta do projeto dentro do diretório público do servidor.
-
-Exemplo no XAMPP:
-
-C:\xampp\htdocs\ancp-test\
-
-Acessar no navegador:
-
-http://localhost/ancp-test/public/index.php
-📌 Funcionalidades Implementadas
-
-Cadastro de animais
-
-Listagem com ordenação por data de cadastro
-
-Filtro para animais com 2 anos ou mais
-
-Cálculo automático da idade
-
-Validação básica de formulário
-
-Proteção contra SQL Injection com Prepared Statements
-
-📎 Observações Técnicas
-
-Projeto desenvolvido em PHP puro conforme solicitado.
-
-Bootstrap utilizado apenas para organização visual.
-
-Filtro de idade implementado utilizando comparação precisa de datas (DATE_SUB), garantindo que animais com exatamente 2 anos sejam incluídos no filtro.
+- config → conexão com banco
+- models → regras de negócio
+- public → interface
+- sql → script da base
