@@ -26,21 +26,21 @@ class Animal {
         return $stmt->execute();
     }
 
-    public function read($onlyOlderThanTwo = false) {
+   public function read($onlyOlderThanTwo = false) {
 
-        $query = "SELECT *,
-                  TIMESTAMPDIFF(YEAR, dt_nasc, CURDATE()) AS idade
-                  FROM {$this->table}";
+    $query = "SELECT *,
+              TIMESTAMPDIFF(YEAR, dt_nasc, CURDATE()) AS idade
+              FROM {$this->table}";
 
-        if ($onlyOlderThanTwo) {
-            $query .= " WHERE TIMESTAMPDIFF(YEAR, dt_nasc, CURDATE()) > 2";
-        }
-
-        $query .= " ORDER BY created_at DESC";
-
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-
-        return $stmt;
+    if ($onlyOlderThanTwo) {
+        $query .= " WHERE dt_nasc <= DATE_SUB(CURDATE(), INTERVAL 2 YEAR)";
     }
+
+    $query .= " ORDER BY created_at DESC";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+
+    return $stmt;
+}
 }
