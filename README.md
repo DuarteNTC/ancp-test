@@ -43,7 +43,7 @@ O projeto disponibiliza duas opções de base de dados, dependendo da necessidad
 
 ## 🔹 Opção 1 – Base limpa (início de novo ambiente)
 
-Arquivo: sql/database.sql
+Arquivo: `sql/database.sql`
 
 - Contém apenas:
 
@@ -58,7 +58,7 @@ Ideal para iniciar um ambiente do zero.
 
 ## 🔹 Opção 2 – Base com dados cadastrados (ambiente de desenvolvimento)
 
-Arquivo: sql/lista-animais-criados.sql
+Arquivo: `sql/lista-animais-criados.sql`
 
 - Contém:
 
